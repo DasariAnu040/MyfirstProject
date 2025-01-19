@@ -1,0 +1,14 @@
+#!/bin/bash
+
+BRANCH_NAME=$(git symbolic-ref --short HEAD)
+
+VALID_BRANCH_REGEX="^(feature|bugfix|release)\/[a-z0-9._-]+$"
+
+if [[ ! $BRANCH_NAME =~ $VALID_BRANCH_REGEX ]]; then
+    echo "ERROR: Branch name '$BRANCH_NAME' does not follow the naming convention."
+    echo "Valid formats are:"
+    echo "  - feature/<name>"
+    echo "  - bugfix/<name>"
+    echo "  - release/<version>"
+    exit 1
+fi
